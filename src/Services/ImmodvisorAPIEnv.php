@@ -1143,7 +1143,7 @@ class ImmodvisorAPIEnv implements iApi
         $referer = ($this->referer === null) ? StringUtils::getReferer() : $this->referer;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('APIKEY: '.$this->api_key, 'APIVERSION: '.parent::VERSION));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('APIKEY: '.$this->api_key, 'APIVERSION: 1.7.1'));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $verifypeer = (substr($referer, 0, 5) == 'https') ? true : false;
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $verifypeer);
