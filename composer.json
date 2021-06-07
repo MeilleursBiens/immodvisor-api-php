@@ -1,6 +1,7 @@
 {
     "name": "meilleursbiens/immodvisor-api-wrapper",
     "description": "A Immodvisor API PHP wrapper",
+    "version": "1.0.0",
     "type": "library",
     "require": {
         "php": ">=7.0",
