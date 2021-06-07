@@ -11,4 +11,5 @@ class ImmodvisorAPITest extends TestCase
         $this->assertTrue(is_object($var));
         unset($var);
     }
+
 }
