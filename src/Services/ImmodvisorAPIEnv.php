@@ -2,6 +2,8 @@
 
 namespace Meilleursbiens\ImmodvisorApiWrapper\Services;
 
+use Meilleursbiens\ImmodvisorApiWrapper\Utils\StringUtils;
+
 /**
  * Méthodes publiques de la classe Api
  * @author Jeremy Humbert <jeremy@immodvisor.com>
@@ -176,7 +178,7 @@ class ImmodvisorAPIEnv implements iApi
      * @return {object|false} 						False en cas d'échec, objet courant sinon
      */
     public function setReferer($referer) {
-        if(is_string($referer) && !empty($referer) && Utils::isUrl($referer)) {
+        if(is_string($referer) && !empty($referer) && StringUtils::isUrl($referer)) {
             $this->referer = $referer;
             return $this;
         }
@@ -361,7 +363,7 @@ class ImmodvisorAPIEnv implements iApi
         if(array_key_exists('activities', $datas) && is_array($datas['activities'])) {
             $activities = array();
             foreach($datas['activities'] as $k => $v) {
-                if(!Utils::isInt($v)) {
+                if(!StringUtils::isInt($v)) {
                     $this->content = false;
                     return $this;
                 }
@@ -400,7 +402,7 @@ class ImmodvisorAPIEnv implements iApi
         if(array_key_exists('activities', $datas) && is_array($datas['activities'])) {
             $activities = array();
             foreach($datas['activities'] as $k => $v) {
-                if(!Utils::isInt($v)) {
+                if(!StringUtils::isInt($v)) {
                     $this->content = false;
                     return $this;
                 }
@@ -461,7 +463,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function proCreate($company_id=null, $company_custom_id=null, $datas=array()) {
         $this->init('pro/create');
-        if(!array_key_exists('email', $datas) || !Utils::isEmail($datas['email'])) {
+        if(!array_key_exists('email', $datas) || !StringUtils::isEmail($datas['email'])) {
             $this->content = false;
             return $this;
         }
@@ -496,7 +498,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function proUpdate($id=null, $custom_id=null, $datas=array()) {
         $this->init('pro/update');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
@@ -526,7 +528,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function proLink($id=null, $custom_id=null, $company_id=null, $company_custom_id=null) {
         $this->init('pro/link');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
@@ -551,7 +553,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function proUnlink($id=null, $custom_id=null, $company_id=null, $company_custom_id=null) {
         $this->init('pro/unlink');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
@@ -625,7 +627,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function reviewCollect($company_id=null, $company_custom_id=null, $email=null, $mobile=null, $firstname=null, $lastname=null, $pro_id=null, $pro_custom_id=null, $activity_id=null, $highlight_number=null, $custom_ref=null, $folder_id=null) {
         $this->init('review/collect');
-        if(!Utils::isEmail($email)) {
+        if(!StringUtils::isEmail($email)) {
             $this->content = false;
             return $this;
         }
@@ -665,14 +667,14 @@ class ImmodvisorAPIEnv implements iApi
             if(!is_array($v)) {
                 continue;
             }
-            if((!array_key_exists('company_id', $v) || !Utils::isInt($v['company_id'])) && (!array_key_exists('company_custom_id', $v) || empty($v['company_custom_id']))) {
+            if((!array_key_exists('company_id', $v) || !StringUtils::isInt($v['company_id'])) && (!array_key_exists('company_custom_id', $v) || empty($v['company_custom_id']))) {
                 continue;
             }
-            if(!array_key_exists('email', $v) || !Utils::isEmail($v['email'])) {
+            if(!array_key_exists('email', $v) || !StringUtils::isEmail($v['email'])) {
                 continue;
             }
             $sent = array();
-            if(array_key_exists('company_id', $v) && Utils::isInt($v['company_id'])) {
+            if(array_key_exists('company_id', $v) && StringUtils::isInt($v['company_id'])) {
                 self::datasAddString('company_id', $v['company_id'], $sent);
             }
             if(array_key_exists('company_custom_id', $v) && !empty($v['company_custom_id'])) {
@@ -688,22 +690,22 @@ class ImmodvisorAPIEnv implements iApi
             if(array_key_exists('lastname', $v) && !empty($v['lastname'])) {
                 self::datasAddString('lastname', $v['lastname'], $sent);
             }
-            if(array_key_exists('pro_id', $v) && Utils::isInt($v['pro_id'])) {
+            if(array_key_exists('pro_id', $v) && StringUtils::isInt($v['pro_id'])) {
                 self::datasAddString('pro_id', $v['pro_id'], $sent);
             }
             if(array_key_exists('pro_custom_id', $v) && $v['pro_custom_id'] !== null) {
                 self::datasAddString('pro_custom_id', $v['pro_custom_id'], $sent);
             }
-            if(array_key_exists('activity_id', $v) && Utils::isInt($v['activity_id'])) {
+            if(array_key_exists('activity_id', $v) && StringUtils::isInt($v['activity_id'])) {
                 self::datasAddString('activity_id', $v['activity_id'], $sent);
             }
-            if(array_key_exists('highlight_number', $v) && Utils::isInt($v['highlight_number'])) {
+            if(array_key_exists('highlight_number', $v) && StringUtils::isInt($v['highlight_number'])) {
                 self::datasAddString('highlight_number', $v['highlight_number'], $sent);
             }
             if(array_key_exists('custom_ref', $v) && $v['custom_ref'] !== null) {
                 self::datasAddString('custom_ref', $v['custom_ref'], $sent);
             }
-            if(array_key_exists('folder_id', $v) && Utils::isInt($v['folder_id'])) {
+            if(array_key_exists('folder_id', $v) && StringUtils::isInt($v['folder_id'])) {
                 self::datasAddString('folder_id', $v['folder_id'], $sent);
             }
             $datas_sents[] = $sent;
@@ -726,7 +728,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function teamGet($id=null) {
         $this->init('team/get');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
@@ -777,7 +779,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function teamUpdate($id=null, $name=null, $custom_id=null) {
         $this->init('team/update');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
@@ -796,7 +798,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function teamDelete($id) {
         $this->init('team/delete');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
@@ -816,11 +818,11 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function teamProLink($id=null, $custom_id=null, $pro_id=null, $pro_custom_id=null) {
         $this->init('team/prolink');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
-        if(!Utils::isInt($pro_id)) {
+        if(!StringUtils::isInt($pro_id)) {
             $this->content = false;
             return $this;
         }
@@ -843,11 +845,11 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function teamProUnlink($id=null, $custom_id=null, $pro_id=null, $pro_custom_id=null) {
         $this->init('team/prounlink');
-        if(!Utils::isInt($id)) {
+        if(!StringUtils::isInt($id)) {
             $this->content = false;
             return $this;
         }
-        if(!Utils::isInt($pro_id)) {
+        if(!StringUtils::isInt($pro_id)) {
             $this->content = false;
             return $this;
         }
@@ -876,7 +878,7 @@ class ImmodvisorAPIEnv implements iApi
      */
     public function googleCollect($company_id=null, $company_custom_id=null, $email=null, $mobile=null, $type=null, $sms_content=null, $sending_date=null) {
         $this->init('google/collect');
-        if(!Utils::isEmail($email)) {
+        if(!StringUtils::isEmail($email)) {
             $this->content = false;
             return $this;
         }
@@ -912,7 +914,7 @@ class ImmodvisorAPIEnv implements iApi
                 continue;
             }
             $sent = array();
-            if(array_key_exists('company_id', $v) && Utils::isInt($v['company_id'])) {
+            if(array_key_exists('company_id', $v) && StringUtils::isInt($v['company_id'])) {
                 self::datasAddString('company_id', $v['company_id'], $sent);
             }
             if(array_key_exists('company_custom_id', $v) && !empty($v['company_custom_id'])) {
@@ -1041,7 +1043,7 @@ class ImmodvisorAPIEnv implements iApi
      * @param {array} $datas						Tableau d'inputs à remplir
      */
     protected static function datasAddInt($k, $v, &$datas, $unsigned=true) {
-        if(Utils::isInt($v, $unsigned)) {
+        if(StringUtils::isInt($v, $unsigned)) {
             $datas[$k] = (int) $v;
         }
     }
@@ -1054,7 +1056,7 @@ class ImmodvisorAPIEnv implements iApi
      * @param {array} $datas						Tableau d'inputs à remplir
      */
     protected static function datasAddFloat($k, $v, &$datas, $unsigned=true) {
-        if(Utils::isFloat($v, $unsigned)) {
+        if(StringUtils::isFloat($v, $unsigned)) {
             $datas[$k] = (float) $v;
         }
     }
@@ -1130,7 +1132,7 @@ class ImmodvisorAPIEnv implements iApi
             $url .= (strpos($url, '?') === false) ? "?" : "&";
             $url .= http_build_query($fields);
         }
-        $referer = ($this->referer === null) ? Utils::getReferer() : $this->referer;
+        $referer = ($this->referer === null) ? StringUtils::getReferer() : $this->referer;
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('APIKEY: '.$this->api_key, 'APIVERSION: '.parent::VERSION));
