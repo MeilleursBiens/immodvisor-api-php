@@ -1048,6 +1048,14 @@ class ImmodvisorAPIEnv implements iApi
         }
     }
 
+    public function getUrlApi(){
+        return "https://api.immodvisor.com/";
+    }
+
+    public function env(){
+        return 'prod';
+    }
+
     /**
      * Formate les flotants pour les inputs des services
      * @access protected
