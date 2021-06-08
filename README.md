@@ -10,6 +10,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Latest Stable Version](https://poser.pugx.org/meilleursbiens/immodvisor-api-wrapper/v)](//packagist.org/packages/meilleursbiens/immodvisor-api-wrapper)
+[![Total Downloads](https://poser.pugx.org/meilleursbiens/immodvisor-api-wrapper/downloads)](//packagist.org/packages/meilleursbiens/immodvisor-api-wrapper)
 
 ___
 
